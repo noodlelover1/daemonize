@@ -20,7 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/noodlelover1/daemonize/refs/heads/m
 ## Usage
 ```help
 USAGE:
-    daemonize --name <name> --cmd <command> [--workdir <directory>]
+    daemonize --name <name> --cmd <command> [--workdir <directory>] [--enable] [--start]
 
 DESCRIPTION:
     daemonize creates a systemd service unit file and starts the service.
@@ -41,6 +41,12 @@ OPTIONS:
         Optional. The working directory for the service process. If not
         specified, the service will run in the root directory (/).
 
+    --enable
+        Optional. Enable the service to start on boot.
+
+    --start
+        Optional. Start the service immediately after creating it.
+
 EXAMPLES:
     # Create a service for a Node.js application
     daemonize --name myapp --cmd "/usr/bin/node /opt/myapp/server.js" --workdir "/opt/myapp"
@@ -51,11 +57,11 @@ EXAMPLES:
     # Create a service without specifying workdir
     daemonize --name background-task --cmd "/usr/bin/some-daemon"
 
+    # Create and enable service without starting
+    daemonize --name myapp --cmd "/usr/bin/node app.js" --enable
+
 FILES:
     Service file: /etc/systemd/system/<name>.service
-
-SEE ALSO:
-    systemctl(1), systemd.service(5)
 ```
 
 ## License
